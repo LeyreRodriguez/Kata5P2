@@ -1,39 +1,43 @@
 package kata5p2.main;
-import java.io.IOException;
-import java.util.List;
+
+import kata5p2.view.HistogramDisplay;
+import static kata5p2.view.MailHistogramBuilder.build;
 import kata5p2.model.Histogram;
 import kata5p2.model.Mail;
-import kata5p2.view.HistogramDisplay;
-import kata5p2.view.MailHistogramBuilder;
-import kata5p2.view.MailListReader;
+import java.io.IOException;
+import java.util.List;
+import static kata5p2.view.MailListReaderBD.read;
 
 public class main {
+    private String fileName;
+    private List<Mail> mailList;
+    private Histogram<String> histogram;
+    private HistogramDisplay histoDisplay;
+    private main aux;
+ 
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        new main().execute();
+       
 
-    public static void main(String args[]) throws IOException{
-
-        main maincontrol = new main();
-        maincontrol.control();
     }
-
-    private void control() throws IOException{
+    
+    private void execute () {
         input();
         process();
         output();
     }
-
-    private String filename;
-    private Histogram<String> histogram;
-    private void input() {
-        filename = "email.txt";
+    
+    private void input () {
+        mailList = read();
     }
-
-    private void process() throws IOException {
-        List<Mail> mailList = MailListReader.read(filename);
-        histogram = MailHistogramBuilder.build(mailList);
+    
+    private void process() {
+        histogram = build(mailList);
     }
-
+    
     private void output() {
-        HistogramDisplay histoDisplay = new HistogramDisplay(histogram);
+        histoDisplay = new HistogramDisplay(histogram);
         histoDisplay.execute();
     }
+    
 }

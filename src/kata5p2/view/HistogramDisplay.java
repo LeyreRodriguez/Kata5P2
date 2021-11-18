@@ -1,4 +1,5 @@
 package kata5p2.view;
+
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import kata5p2.model.Histogram;
@@ -9,37 +10,40 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.ApplicationFrame;
 
-public class HistogramDisplay extends ApplicationFrame{
-
+public class HistogramDisplay extends ApplicationFrame {
     private final Histogram<String> histogram;
-
+    
     public HistogramDisplay(Histogram<String> histogram) {
-        super("Histograma");
+        super("Histogram");
         this.histogram = histogram;
         setContentPane(createPanel());
         pack();
+        
     }
-
-    public void execute(){
+    
+    public void execute () {
         setVisible(true);
     }
+    
     private JPanel createPanel() {
         ChartPanel chartPanel = new ChartPanel(createChart(createDataset()));
         chartPanel.setPreferredSize(new Dimension(500,400));
         return chartPanel;
     }
-
-    private JFreeChart createChart(DefaultCategoryDataset dataSet){
-
-        JFreeChart chart = ChartFactory.createBarChart("Histograma JFreeChart","Dominios emails","Nº emails",dataSet,PlotOrientation.VERTICAL, false, false, rootPaneCheckingEnabled);
+    
+    private JFreeChart createChart(DefaultCategoryDataset dataSet ) {
+        JFreeChart chart = ChartFactory.createBarChart("Histograma JFreeChart", 
+                          "Dominios email", "Nº de emails", dataSet, 
+                           PlotOrientation.VERTICAL, rootPaneCheckingEnabled,
+                           rootPaneCheckingEnabled, rootPaneCheckingEnabled);
+        
         return chart;
     }
-
-    private DefaultCategoryDataset createDataset(){
-
+    
+    private DefaultCategoryDataset createDataset() {
         DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
         for (String key : histogram.keySet()) {
-            dataSet.addValue(histogram.get(key),"", key);
+            dataSet.addValue(histogram.get(key), "", key);
         }
         return dataSet;
     }
