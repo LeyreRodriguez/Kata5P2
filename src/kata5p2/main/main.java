@@ -1,5 +1,4 @@
 package kata5p2.main;
-
 import java.io.IOException;
 import java.util.List;
 import kata5p2.model.Histogram;

@@ -1,5 +1,4 @@
 package kata5p2.view;
-
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import kata5p2.model.Histogram;
